@@ -19,14 +19,17 @@ import { assertThat } from '../../j4b1-assert.js'
 // pomocnicze maxValue (nie możesz zmieniać jego początkowego przypisania)
 let maxValue = 0;
 
-;((moduleName, initialValue) => {
+; ((moduleName = 'test', initialValue) => {
 	// #Reguła:
-  // Nie możesz w środku tego scope'a zmieniać kodu!
+	// Nie możesz w środku tego scope'a zmieniać kodu!
 	console.log('ModuleName', moduleName);
 
 	maxValue = initialValue;
-})('cokolwiek', 8000);
+})(undefined, 8000);
 
+// parametry powinny iść prawidłowo (coding standard) tak:
+// (initialValue, moduleName = 'test')
+// parametry z wartościami domyślnymi lecą na koniec...
 
 // #Reguła:
 // Nie możesz zmieniać kodu poniżej:
