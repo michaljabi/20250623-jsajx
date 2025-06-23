@@ -23,13 +23,49 @@ class ShowDepartment {
 	}
 
 	sayNameAfter(seconds = 2) {
+
+		console.log(this);
+		console.log(this.printMyName());
+		// const result = 'This is ' + that.printMyName() // sposób 2
+		// const that = this; // sposób 3
+		// const printMyName = this.printMyName.bind(this); sposób 4
+
+		/* sposób 5:
+
 		setTimeout(function () {
-			const result = 'This is' + this.printMyName()
+
+			console.log(this);
+			const result = 'This is ' + this.printMyName()
+
+			console.log(result)
+			// ten kod poniżej jest potrzebny tylko dla testu (nie zmieniaj go):
+			testSpy = result;
+		}.bind(this), seconds * 1000)
+		
+		*/
+
+		setTimeout(() => {
+
+			console.log(this);
+			const result = 'This is ' + this.printMyName()
+
 			console.log(result)
 			// ten kod poniżej jest potrzebny tylko dla testu (nie zmieniaj go):
 			testSpy = result;
 		}, seconds * 1000)
 	}
+}
+
+
+function setTimeout2(callback) {
+
+	class TimeoutFake {
+		method = callback;
+	}
+
+	const myObj = new TimeoutFake();
+
+	myObj.method()
 }
 
 

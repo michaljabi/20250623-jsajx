@@ -17,6 +17,9 @@ function lowerCased(word = '') {
 	return word.toLowerCase();
 }
 
+// const capitalize = () => word.charAt(0).toUpperCase() + word.slice(1);
+// const lowerCased = () => word.toLowerCase();
+
 /*
 function kebabCaseToCamelCase(sentence = '') {
 	return sentence.split('-').map((w, i) => i === 0 ? w.toLowerCase() : capitalize(w)).join('')
@@ -56,7 +59,7 @@ function pipeLine(...operators) {
 	return (data) => {
 		let cache = data;
 		operators.forEach((operator) => {
-			 cache = operator(cache);
+			cache = operator(cache);
 		})
 		return cache;
 	}
@@ -68,17 +71,17 @@ function applyIfOperator(conditionFn, fnToApply) {
 }
 
 function isNotFirstElementInMap(element, idx) {
-	 return idx > 0;
+	return idx > 0;
 }
 
 function capitalizeIfNotFirstElement() {
-	 return applyIfOperator(isNotFirstElementInMap, capitalize)
+	return applyIfOperator(isNotFirstElementInMap, capitalize)
 }
 
 pipeLine(
 	capitalizeOperator(),
 	joinOperator('')
-)('steefan'.split('') ) //=
+)('steefan'.split('')) //=
 
 pipeLine(
 	sentenceToWordSplitByOperator('-'),
