@@ -25,7 +25,7 @@ let maxValue = 0;
 	console.log('ModuleName', moduleName);
 
 	maxValue = initialValue;
-})();
+})('cokolwiek', 8000);
 
 
 // #Reguła:
