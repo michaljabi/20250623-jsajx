@@ -9,15 +9,26 @@ import { assertThat } from '../../j4b1-assert.js'
  * - Popraw kodzik tak, aby działał.
  * - Postaraj się zastosować zasadę "DRY" - Don't Repeat Yourself
  */
+function sayYourName() {
+	return this.fullName;
+}
 
 const personJen = {
 	fullName: 'Jen Barber',
-	profession: 'IT Manager'
+	profession: 'IT Manager',
+	sayYourName
+	// sayYourName() {
+	// 	return this.fullName;
+	// }
 }
 
 const personRoy = {
 	fullName: 'Roy Trenneman',
-	profession: 'The IT Guy'
+	profession: 'The IT Guy',
+	sayYourName
+	// sayYourName() {
+	// 	return this.fullName;
+	// }
 }
 
 // #Reguła:
