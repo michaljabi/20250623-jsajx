@@ -26,7 +26,7 @@ console.log({} === {});
 console.log(new Object() === new Object());
 console.log(new Date() === new Date());
 
-
+Number.MAX_SAFE_INTEGER //=
 console.log(1n === 1n);
 console.log('A' === 'A');
 
