@@ -79,7 +79,7 @@ borrowName() //=
 // Dlatego możemy na siłę "przyspawać" kontekst do danej metody. Służy do tego statyczna metoda ma obiekcie funkcji nazwana: .bind()
 
 // Zobacz:
-const bindBorrowName = borrowName.bind(myCar);
+const bindBorrowName = borrowName.bind(personMaurice);
 
 borrowName(); //=
 bindBorrowName() //=
@@ -100,14 +100,22 @@ otherCar.bindBorrowName() //=
 // Jeśli nie zostaną zadeklarowane na obiekcie - słowo kluczowe `this` nie pokaże na obiekt globalny,
 // tylko na pusty obiekt.
 
+const myThisInsideAnFunctionExpression = function () {
+	return this;
+}
+
 const myThisInsideAnArrow = () => {
 	return this;
 }
 
+myThisInsideAnFunctionExpression() //=
 myThisInsideAnArrow() //=
+
+// console.log(this);
 
 const adminUser = {
 	role: 'SuperAdmin',
+	// getRole: function () { return this.role }
 	getRole: () => this.role
 }
 

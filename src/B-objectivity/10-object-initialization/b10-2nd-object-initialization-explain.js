@@ -140,6 +140,8 @@ class InheritedClass extends BaseClass {
 
 	say(myParam) {
 		console.log('?')
+		// console.log(name);
+		// console.log(this.name);
 	}
 }
 

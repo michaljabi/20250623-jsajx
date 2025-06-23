@@ -41,7 +41,7 @@
     "g20-ch": "nodemon src/G-hot-news-from-JS-universum/20-using-proxy/g20-3rd-using-proxy-challenge.js"
   },
   "author": "Jabi",
-  "type": "module",
+  "type": "commonjs",
   "license": "ISC",
   "dependencies": {
     "immer": "^10.1.1",
