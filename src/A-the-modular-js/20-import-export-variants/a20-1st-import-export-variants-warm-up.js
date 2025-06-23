@@ -1,5 +1,5 @@
 import { assertThat } from '../../j4b1-assert.js'
-import { mySecretConstant } from './a20-1st-helper.js'
+import $a_A45, { mySecretConstant, assertThat as aT } from './a20-1st-helper.js'
 
 /**
  * a20-import-export-variants
@@ -15,6 +15,7 @@ import { mySecretConstant } from './a20-1st-helper.js'
  */
 
 // const mySecretConstant = 'wrong way!';
+console.log('start')
 
 // #Reguła:
 // Nie możesz zmieniać kodu poniżej:
