@@ -14,11 +14,29 @@ import { assertThat } from "../../j4b1-assert.js";
  * - nie można zmieniać istniejącego kodu.
  */
 
+function myValuE() {
+
+}
+
 var myValue = 2000;
 console.log("Current value is", myValue);
 
+function sayValue() {
+// {
 var myValue = 3000;
 console.log("Current value is", myValue);
+// }
+}
+sayValue();
+
+;(function () {
+  var myValue = 200
+  console.log(myValue)
+})();
+
+// IIFE 
+
+// myValue = 2000;
 
 // #Reguła:
 // Nie możesz zmieniać kodu poniżej:
