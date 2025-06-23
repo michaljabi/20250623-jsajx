@@ -1,3 +1,5 @@
+// // @ts-check
+
 /**
  * b10-object-initialization
  * Explain
@@ -30,8 +32,8 @@ function makePersonWith(name, lastName = 'Doe') {
 // Tutaj dostajemy faktyczny konstruktor - również możemy przekazywać parametry i dopisywać je do instancji
 // `this` będzie tutaj reprezentowało instancję naszego nowo tworzonego obiektu.
 function Person() {
-	 this.name = 'Michał';
-	 this.lastName = 'Kowalsky';
+	this.name = 'Michał';
+	this.lastName = 'Kowalsky';
 }
 
 
@@ -40,10 +42,10 @@ function Person() {
 // Tutaj jeśli zapomnimy słowa kluczowego `new` przy tworzeniu instancji obiektów - zostaniemy o tym poinformowani.
 // Dodatkowo - widzimy dokładnie gdzie jest konstruktor, i w prosty sposób możemy dopisywać metody
 class MyPerson {
-	 constructor () {
-		 this.name = 'Michał';
-		 this.lastName = 'Kowalsky';
-	 }
+	constructor() {
+		this.name = 'Michał';
+		this.lastName = 'Kowalsky';
+	}
 }
 
 // Nie jest konieczne używanie konstruktora, od jednej z wersji po ES6 deklaracja pól, może odbywać się poza konstruktorem
@@ -51,6 +53,8 @@ class MyOtherPerson {
 	name = 'Michał';
 	lastName = 'Kowalsky';
 }
+
+console.log(MyOtherPerson);
 
 // Należy wiedzieć iż zapis 3) to tak naprawdę "lukier składniowy".
 // Pod spodem klasa dalej jest tworzona przez JS tak samo jak w przypadku nr 2. Jednak zapis 3) jest bezpieczniejszy.
@@ -79,6 +83,7 @@ console.log(person4.constructor.name);
 // Na tym etapie możemy podejrzeć łańcuch dziedziczenia:
 console.log(person1 instanceof Object)
 console.log(person4 instanceof Object, person4 instanceof MyOtherPerson)
+console.log(person4 instanceof MyPerson)
 
 // Ponieważ funkcja "dziedziczy" swój prototyp po - Object.
 // Dodawanie pól i metod statycznych jest stosunkowo proste:
@@ -118,14 +123,23 @@ MyStaticClass.showGreetings()
 // Zapisy są podobne jak w innych językach OOP
 // Jeśli chcemy wykorzystać konstruktor klasy pochodnej musimy odwołać się do klasy bazowej jako super();
 class BaseClass {
-	constructor (name) {
+	constructor(name) {
 		this.name = name;
 	}
 }
 
 class InheritedClass extends BaseClass {
-	constructor (name) {
+
+	constructor(name) {
 		super(name);
+	}
+
+	// say() {
+	// 	console.log('!')
+	// }
+
+	say(myParam) {
+		console.log('?')
 	}
 }
 
@@ -134,6 +148,8 @@ console.log(mySampleInstance.name);
 console.log(mySampleInstance instanceof InheritedClass)
 console.log(mySampleInstance instanceof BaseClass)
 console.log(mySampleInstance instanceof Object)
+
+mySampleInstance.say();
 
 // W tym układzie wydaje się że mamy pełen "koszyk" funkcjonalności,
 // które swobodnie pozwalają nam pisać kodzik jako OOP (Object Oriented Programming).
