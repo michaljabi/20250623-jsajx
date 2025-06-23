@@ -22,6 +22,30 @@ assertThat("x + 300 should equal 310", (expect) => expect(x + 300).toBe(310)); /
 // Spróbuj naprawić poniższe 3 testy, żeby pokazywały "✅ PASS",
 // Jednak NIE MOŻESZ RUSZAĆ kodu samego testu. Nie wolno Ci go zmieniać:
 
+const myValue = 680;
+
+myValue;
+console.log(myValue);
+myValue + 200; //=
+
+try {
+  xisjisdy
+  console.log('!')
+} catch (e) {
+  console.log(e.message);
+}
+
+function sayHello() {
+  console.log('!')
+}
+
+sayHello();
+sayHello();
+sayHello();
+sayHello();
+
+console.log( 2 || 3 || 4 || 5)
+
 // #Reguła:
 // Nie możesz zmieniać kodu poniżej:
 assertThat("myValue should equal 680",
