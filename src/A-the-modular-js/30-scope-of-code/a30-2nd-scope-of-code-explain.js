@@ -30,7 +30,7 @@
 // a) Module Global SCOPE
 const model = 'Q2'
 
-function mySuperCar () {
+function mySuperCar() {
 	// b) local SCOPE of (mySuperCar)
 
 	function getName() {
@@ -55,17 +55,24 @@ mySuperCar();
 // W rzeczywistym kodzie raczej nie spotkamy takich konstrukcji (😅).
 // Służy ona wyłączenie sprawdzeniu, jak zachowuje się przeszukiwanie scope w JS.
 const myColor = 'red';
+
+globalThis.myColor = 'black';
+
 (function inception() {
-	const myColor = 'cristal';
+	// const myColor = 'cristal';
 
 	(function secondDream() {
-		const myColor = 'sapphire';
+		//const myColor = 'sapphire';
 
 		(function thirdDream() {
 			const myColor = 'emerald';
 
 			(function fourthDream() {
+				// var myColor= undefined;
+				// console.log(myColor);
+
 				const myColor = 'diamond';
+				// myColor = '?'
 				// komentuj po kolei idąc z tego scope odwołanie do stałem myColor - aby zobaczyć jak będzie się zachowywać
 				console.log(myColor);
 			})()
