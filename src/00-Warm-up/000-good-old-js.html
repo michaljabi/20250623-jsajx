@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Good old JS</title>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 </head>
+
 <body>
     <h1 id="heading-1"></h1>
+    <h2>mi to pokaże</h2>
+
     <script>
         var ten = 10;
         var $header = document.querySelector('#heading-1');
@@ -26,5 +31,10 @@
         console.log(coverMeFromGlobalScope)
     </script>
     -->
+    <script>
+        console.log('jQuery jest w global scope', $)
+        $('h1').html('Hello...')
+    </script>
 </body>
+
 </html>
