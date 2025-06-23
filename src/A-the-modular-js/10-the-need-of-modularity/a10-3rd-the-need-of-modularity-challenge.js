@@ -1,3 +1,4 @@
+// //@ts-check
 import { assertThat } from '../../j4b1-assert.js'
 /**
  * a10-the-need-of-modularity
@@ -18,6 +19,9 @@ import { assertThat } from '../../j4b1-assert.js'
 
 // pomocnicze maxValue (nie możesz zmieniać jego początkowego przypisania)
 let maxValue = 0;
+// maxValue = 0;
+// maxValue = ''
+
 
 ; ((moduleName = 'test', initialValue) => {
 	// #Reguła:
