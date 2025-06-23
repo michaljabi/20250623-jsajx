@@ -12,11 +12,29 @@ import { assertThat } from '../../j4b1-assert.js'
 
 function Person(fullName = '') {
 	this.fullName = fullName;
+	// this.introduce = function() {
+	// 	return `My name is ${this.fullName}`
+	// }
 }
+
 
 const actor = new Person('Richard Ayoade');
 const theItGuy = new Person('Maurice Moss');
 const theBoss = new Person('Douglas Reynholm');
+
+Person.prototype.introduce = function () {
+	return `My name is ${this.fullName}`
+}
+
+/*
+function introduce() {
+	return `My name is ${this.fullName}`
+}
+
+actor.introduce = introduce;
+theItGuy.introduce = introduce;
+theBoss.introduce = introduce;
+*/
 
 // #Reguła:
 // Nie możesz zmieniać kodu poniżej:
