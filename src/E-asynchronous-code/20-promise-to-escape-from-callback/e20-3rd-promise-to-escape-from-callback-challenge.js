@@ -22,10 +22,17 @@ const DZej = {
 		}
 		return Promise.reject({ status: 404, message: 'Invalid URL!' })
 	},
-	/*
+	// Rozwiązanie nr 
 	getJSON(url) {
-		return new Promise(() => { })
+		return new Promise((resolve, reject) => {
+			if (url.endsWith('/it')) {
+				resolve({ message: 'did you try?' })
+			} else {
+				reject({ status: 404, message: 'Invalid URL!' })
+			}
+		})
 	},
+	/*
 	async getJSON(url) {
 		return ''
 	}
