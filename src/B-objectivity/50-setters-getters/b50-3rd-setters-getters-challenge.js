@@ -17,22 +17,42 @@ import { assertThat } from '../../j4b1-assert.js'
  * - Możesz pisać kodzik tylko w instancji `vintageCuckooClock`
  */
 
+class VintageCuckooClock {
+	#name = '';
+
+	set name(value) {
+		this.#name = value;
+	}
+
+	get name() {
+		return this.#name;
+	}
+}
+
+//const myName = Symbol();
+
 const vintageCuckooClock = {
 	// #Reguła:
 	// Kodzik można pisać tylko tutaj w środku.
 	hours: 20,
 	minutes: 11,
 	seconds: 44,
+	//[myName]: 'test',
 	get lcdTime() {
-		return [this.hours, this.minutes, this.seconds].join(':')
+		const { hours, minutes, seconds } = this;
+		return [hours, minutes, seconds].join(':')
 	},
 	set lcdTime(value = '') {
-		const time = value.split(':');
-		this.hours = Number(time[0]);
-		this.minutes = Number(time[1]);
-		this.seconds = Number(time[2]);
+		// const [h,m,s] = value.split(':').map(v => Number(v));
+		const [h, m, s] = value.split(':').map(Number);
+		this.hours = h;
+		this.minutes = m;
+		this.seconds = s;
+		//this[myName] = value
 	}
 }
+
+console.log(vintageCuckooClock)
 
 // #Reguła:
 // Nie możesz zmieniać kodu poniżej:
@@ -43,12 +63,19 @@ assertThat(
 vintageCuckooClock.hours = 15;
 vintageCuckooClock.minutes = 10;
 vintageCuckooClock.seconds = 50;
+
+console.log(vintageCuckooClock.lcdTime)
+
 assertThat(
 	'Should show properly changed time for 15:10:50',
 	expect => expect(vintageCuckooClock.lcdTime).toBe('15:10:50')
 )  //=
 
 vintageCuckooClock.lcdTime = '23:33:59';
+
+console.log(vintageCuckooClock)
+
+console.log(vintageCuckooClock.lcdTime)
 assertThat(
 	'Should work for settled time',
 	expect => expect(vintageCuckooClock.lcdTime).toBe('23:33:59')
