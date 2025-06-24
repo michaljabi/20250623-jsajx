@@ -18,6 +18,12 @@ const person = {
 
 person.email //=
 
+// ponieważ email ma tylko getter - to nie możesz do niego nic przypisać, nie ma to efektu
+// możesz określić property .email - jako Read Only value!
+person.email = 'troll@gmail.com'
+
+console.log(person.email);
+
 // person.name = 'Michał'
 
 // person.email //=

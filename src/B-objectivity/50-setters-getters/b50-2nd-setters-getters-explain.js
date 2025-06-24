@@ -23,8 +23,9 @@
 const person = {
 	name: 'Maurice',
 	lastName: 'Moss',
+	// #privField: '',
 	get fullName() {
-		return this.name + ' '+ this.lastName;
+		return this.name + ' ' + this.lastName;
 	}
 }
 console.log(person.fullName)
@@ -37,7 +38,11 @@ console.log(person.fullName)
 
 // Podobnie możemy je zastosować w klasie:
 class MyItProfessional {
-	constructor (name = '', ageOfWork = 0) {
+
+	// _position = '' // konwencja (to nie pole prywatne!)
+	#position = ''; // FAKTYCZNE pole private w klasie!
+
+	constructor(name = '', ageOfWork = 0) {
 		this.name = name;
 		this.ageOfWork = ageOfWork;
 	}
@@ -47,23 +52,25 @@ class MyItProfessional {
 	}
 
 	set position(value) {
-		switch(value) {
+		switch (value) {
 			case 'junior':
 				this.ageOfWork = 1;
-			break;
+				break;
 			case 'mid':
 				this.ageOfWork = 2;
-			break;
+				break;
 			case 'senior':
 				this.ageOfWork = 5;
-			break;
+				break;
 			default:
 				console.warn('sorry, unknown position:', value);
 		}
+		this.#position = value
 	}
 }
 
 const maurice = new MyItProfessional('Maurice', 10);
+console.log(maurice)
 console.log(maurice.position);
 console.log(maurice.ageOfWork);
 maurice.position = 'mid';
