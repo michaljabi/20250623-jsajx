@@ -21,10 +21,18 @@ function getTheRefund(refundFn) {
 
 // Person 1
 let collectedRefund = 0;
-
+getTheRefund((value) => {
+	collectedRefund += value;
+})
 
 // Person 2
 let collectedTwoRefunds = 0;
+getTheRefund((value) => {
+	collectedTwoRefunds += value;
+})
+getTheRefund((value) => {
+	collectedTwoRefunds += value;
+})
 
 
 // #Reguła:
