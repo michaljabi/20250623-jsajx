@@ -9,7 +9,21 @@ import { assertThat } from '../../j4b1-assert.js'
 const person = {
 	// #Reguła:
 	// Kodzik można pisać tylko tutaj w środku.
+	name: 'Janusz',
+	lastName: 'Kowalski',
+	get email() {
+		return `${this.name}.${this.lastName}@workload.com`.toLowerCase();
+	}
 }
+
+person.email //=
+
+// person.name = 'Michał'
+
+// person.email //=
+// person.email
+// person.email
+// person.email
 
 // #Reguła:
 // Nie możesz zmieniać kodu poniżej:
