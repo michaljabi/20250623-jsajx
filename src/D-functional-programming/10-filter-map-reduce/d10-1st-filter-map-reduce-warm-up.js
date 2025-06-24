@@ -1,4 +1,5 @@
 import { assertThat } from '../../j4b1-assert.js'
+import { stringHelper } from '../../A-the-modular-js/20-import-export-variants/a20-challenge-project/czesuaf-util.js'
 /**
  * d10-filter-map-reduce
  * Warm up
@@ -10,7 +11,33 @@ import { assertThat } from '../../j4b1-assert.js'
  * - Transformując dane staraj się korzystać z programowania funkcyjnego (metody tablicowe)
  */
 
+const splitToWords = (sentence = '', splitter = '-') => sentence.split(splitter);
 
+function capitalize(sentence) {
+	return splitToWords(sentence, ' ').map((w, idx) => {
+		if (idx === 0) {
+			return stringHelper.capitalize(w);
+		}
+		return w.toLowerCase();
+	}).join(' ');
+}
+
+function kebabCaseToCamelCase(sentence) {
+	return splitToWords(sentence).map((w, idx) => {
+		if (idx === 0) {
+			return w.toLowerCase();
+		}
+		return stringHelper.capitalize(w);
+	}).join('');
+}
+
+function kebabCaseToPascalCase(sentence) {
+	return splitToWords(sentence).map((w) => stringHelper.capitalize(w)).join('');
+}
+
+function kebabCaseToSnakeCase(sentence) {
+	return splitToWords(sentence).map(w => w.toLocaleLowerCase()).join('_');
+}
 
 // #Reguła:
 // Nie możesz zmieniać kodu poniżej:
@@ -28,5 +55,5 @@ assertThat(
 )  //=
 assertThat(
 	'kebabCaseToSnakeCase > Should convert string my-first-python-variable in to my_first_python_variable',
-	expect => expect(kebabCaseToSnakeCase('my-first-python-variable')).toBe('my_first_python_variable')
+	expect => expect(kebabCaseToSnakeCase('my-first-Python-variable')).toBe('my_first_python_variable')
 )  //=
