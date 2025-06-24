@@ -26,8 +26,9 @@ import { assertThat } from '../../j4b1-assert.js'
  */
 
 /**
- * @interface CallbackFn
- * 
+ * @callback CallbackFn
+ * @param {{message: string}| null} data
+ * @param {{status: number, message: string} | null} error
  */
 
 /**
@@ -46,7 +47,7 @@ const DZej = {
 
 	/**
 	 * @param {string} url 
-	 * TODO: finish 
+	 * @param {CallbackFn} callback
 	 */
 	getJSON(url, callback) {
 		// #Reguła:
