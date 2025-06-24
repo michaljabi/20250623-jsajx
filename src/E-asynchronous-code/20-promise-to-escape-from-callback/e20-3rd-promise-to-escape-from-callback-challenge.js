@@ -17,23 +17,35 @@ const DZej = {
 	getJSON(url) {
 		// #Reguła:
 		// Kodzik można pisać i zmieniać tylko w tym bloku.
-		// return Promise.resolve('')
+		if (url.endsWith('/it')) {
+			return Promise.resolve({ message: 'did you try?' })
+		}
+		return Promise.reject({ status: 404, message: 'Invalid URL!' })
+	},
+	/*
+	getJSON(url) {
+		return new Promise(() => { })
+	},
+	async getJSON(url) {
+		return ''
 	}
+		*/
 }
+
 
 // #Reguła:
 // Nie możesz zmieniać kodu poniżej:
 DZej.getJSON('https://reynholm-industries.com/it').then((ajaxResult) => {
-		assertThat(
-			'Should resolve with did you try message - object',
-			expect => expect(ajaxResult).toEqual({ message: 'did you try?' })
-		)//=
-	})
+	assertThat(
+		'Should resolve with did you try message - object',
+		expect => expect(ajaxResult).toEqual({ message: 'did you try?' })
+	)//=
+})
 
 DZej.getJSON('https://reynholm-industries.com/not-existing').catch(err => {
 	assertThat(
 		'should reject with error',
-		expect => expect(err).toEqual({status: 404, message: 'Invalid URL!'})
+		expect => expect(err).toEqual({ status: 404, message: 'Invalid URL!' })
 	)//=
 })
 
