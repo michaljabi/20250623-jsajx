@@ -12,6 +12,18 @@ import { assertThat } from '../../j4b1-assert.js'
  * - Kod zmieniaj tylko w środku implementacji getJSON()
  */
 
+function coutdownTime(ms = 1000) {
+	return new Promise((resolve) => {
+		setTimeout(() => {
+			resolve()
+		}, ms)
+	})
+}
+
+coutdownTime(4000).then(() => {
+	console.log('!')
+})
+
 
 const DZej = {
 	getJSON(url) {
@@ -22,14 +34,16 @@ const DZej = {
 		}
 		return Promise.reject({ status: 404, message: 'Invalid URL!' })
 	},
-	// Rozwiązanie nr 
+	// Rozwiązanie nr 2 (jeśli setTimeout by był to TYLKO TAK możemy to zrobić)
 	getJSON(url) {
 		return new Promise((resolve, reject) => {
-			if (url.endsWith('/it')) {
-				resolve({ message: 'did you try?' })
-			} else {
-				reject({ status: 404, message: 'Invalid URL!' })
-			}
+			setTimeout(() => {
+				if (url.endsWith('/it')) {
+					resolve({ message: 'did you try?' })
+				} else {
+					reject({ status: 404, message: 'Invalid URL!' })
+				}
+			}, 3000)
 		})
 	},
 	/*
