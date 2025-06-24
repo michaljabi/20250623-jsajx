@@ -16,7 +16,7 @@ const collector = [];
 collector.push(1);
 
 
-Promise.resolve().then(() => {
+queueMicrotask(() => {
 	collector.push(3);
 })
 
