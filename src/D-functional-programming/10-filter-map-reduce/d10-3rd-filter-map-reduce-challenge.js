@@ -28,10 +28,40 @@ const backendApiRequest = () => [
 ];
 const emailData = backendApiRequest();
 
+// Pure functions:
+// 1. same input - same output
+// 2. Singular reponsibility
+// 3. NO SIDE EFFECTS !
+const pluckNameFromEmail = email => email.split('@')[0];
+const { capitalize } = stringHelper;
+const isAWomanName = name => name.toLowerCase().endsWith('a');
+const endsWithSiteCom = email => email.endsWith('@site.com');
+
+const endsWith = (domain) => (email) => email.endsWith(domain);
+const endsWithDomainPl = endsWithFn('@domain.pl')
+// Result: mam doskonale re-używalne mini funkcje.
+
+function endsWithFn(domain = '') {
+	return function (email = '') {
+		return email.endsWith(domain)
+	}
+}
+
+pluckNameFromEmail('helloMajk@gmail.com') //=
+pluckNameFromEmail('janina@gmail.com') //=
+
+endsWithFn('@gmail.com')('janina@gmail.com') //=
+
+
+// jest możliwa optymalizacja (w razie czego) łamiemy regułę bo to nie Pure Function
+const pluckNameFromEmailAndCapitalize = email => capitalize(pluckNameFromEmail(email))
+
 // Tutaj możesz pisać:
-const showNamesOnly = emailData.map(email => email.split('@')[0]).map(stringHelper.capitalize);
-const showWomanNamesOnly = emailData.map(email => email.split('@')[0]).filter(name => name.endsWith('a')).map(stringHelper.capitalize);
-const showEmailsWithDomainSiteCom = emailData.filter(email => email.endsWith('@site.com'));
+// const showNamesOnly = emailData.map(pluckNameFromEmailAndCapitalize);
+
+const showNamesOnly = emailData.map(pluckNameFromEmail).map(capitalize);
+const showWomanNamesOnly = showNamesOnly.filter(isAWomanName);
+const showEmailsWithDomainSiteCom = emailData.filter(endsWith('@site.com'));
 
 
 // #Reguła:
