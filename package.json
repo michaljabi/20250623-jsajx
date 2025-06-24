@@ -48,6 +48,7 @@
     "immutable": "^5.1.2"
   },
   "devDependencies": {
+    "jsdom": "^26.1.0",
     "nodemon": "^3.1.10"
   }
 }

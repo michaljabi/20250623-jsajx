@@ -50,17 +50,17 @@ function makeAjaxCall(url, callbackFn) {
 
 // Przykład callback hell:
 makeAjaxCall('https://first', (data, err) => {
-	if(err) {
+	if (err) {
 		console.log('error 😐', err)
 		return;
 	}
 	makeAjaxCall('https://second' + data.url, (data, err) => {
-		if(err) {
+		if (err) {
 			console.log('error 😐', err)
 			return;
 		}
 		makeAjaxCall('https://third' + data.url, (data, err) => {
-			if(err) {
+			if (err) {
 				console.log('error 😐', err)
 				return;
 			}
@@ -78,13 +78,52 @@ makeAjaxCall('https://first', (data, err) => {
 
 // Zobaczmy najprostrzy przykład wywołania:
 
-const provider = Promise.resolve('hello');
+// TODO: co jeśli za 3 sec ?
+const provider = new Promise((resolve, reject) => {
+	setTimeout(() => {
+		// reject(new Error('something went wrong'))
+		resolve('hello');
+	}, 3000)
+	// reject(new Error('something went wrong'))
+});
+
+// const provider = Promise.resolve('hello');
+// const provider = Promise.reject(new Error('something went wrong'));
 
 // Odbiór promise:
 // CONSUMER:
-provider.then((message) => {
-	console.log(message)
-})
+provider.then().catch().finally()
+
+provider
+	.then((v) => {
+		// throw new Error('Not allowed to collect refund')
+		console.log(v)
+		return 890
+	})
+	.then((v) => {
+		console.log(v)
+	})
+	.catch((err) => {
+		console.log(err.message)
+	})
+	.finally(() => {
+		console.log('ja zawsze się wywołam')
+	})
+
+	; (async () => {
+
+		try {
+			const v = await provider;
+			console.log(v);
+			const num = await Promise.resolve(890);
+			console.log(num)
+		} catch (e) {
+			console.log(e.message)
+		} finally {
+			console.log('ja zawsze się wywołam')
+		}
+
+	})();
 
 // całe piękno polega na tej własności:
 provider
@@ -114,16 +153,32 @@ function makeAjaxCallAsPromise(url) {
 
 makeAjaxCallAsPromise('https://first')
 	.then((data) => {
+		if (data === 'resolved') {
+			throw new Error('Oh no...')
+		}
 		return makeAjaxCallAsPromise('https://second' + data.url);
 	})
 	.then((data) => {
 		return makeAjaxCallAsPromise('https://third' + data.url);
+	}, (err) => {
+		console.log(err.message)
+		return 'to co będzie tutaj na return...'
 	})
 	.then((data) => {
+
 		console.log('THIS IS COOLNESS !!!', data);
 	})
+	.then((data) => {
+
+		console.log(data);
+		return 800
+	})
+	.then((data) => {
+
+		console.log(data);
+	})
 	.catch((err) => {
-		console.log('error 😐', err)
+		console.log('error 😐', err.message)
 	})
 
 // Z promise - mamy 2 opcje:
