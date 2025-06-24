@@ -12,7 +12,7 @@ import { assertThat } from '../../j4b1-assert.js'
 
 function Person(fullName = '') {
 	this.fullName = fullName;
-	// this.introduce = function() {
+	// this.introduce = function () {
 	// 	return `My name is ${this.fullName}`
 	// }
 }
@@ -25,6 +25,9 @@ const theBoss = new Person('Douglas Reynholm');
 Person.prototype.introduce = function () {
 	return `My name is ${this.fullName}`
 }
+
+console.log(actor instanceof Person);
+console.log(actor instanceof Object);
 
 /*
 function introduce() {

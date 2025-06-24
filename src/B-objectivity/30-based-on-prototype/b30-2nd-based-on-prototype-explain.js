@@ -15,7 +15,7 @@ function MyDepartment(placement) {
 		return this;
 	}
 }
-MyDepartment.showStatic = function() {
+MyDepartment.showStatic = function () {
 	// Metoda statyczna nie ma dostępu do instancji !!
 	// Można tutaj użyć `this`, jednak jest to to samo co użycie:
 	// return MyDepartment;
@@ -33,7 +33,7 @@ console.log(MyDepartment.otherStaticField)
 
 // To samo można zapisać w bardziej nowoczesny sposób:
 class Department {
-	constructor (placement) {
+	constructor(placement) {
 		this.placement = placement
 	}
 	showYourself() {
@@ -57,7 +57,7 @@ console.log(Department.otherStaticField)
 // Można na przykład użyć przy konstruowaniu obiektów coś takiego:
 const otherIT = new Department('Top floor');
 console.log(otherIT.showYourself())
-const hijacker = {secret: 'room'}
+const hijacker = { secret: 'room' }
 // Zauważ że metoda `showYourself` posiada w sobie inną statyczną metodę `.bind()` - którą już poznaliśmy
 const boundShow = otherIT.showYourself.bind(hijacker);
 console.log(boundShow)
@@ -68,9 +68,14 @@ console.log(boundShow())
 // jednym z nich w przypadku konstruktorów tworzonych z funkcji - jest pole:
 // `.prototype`
 
+
+class MyHardware {
+
+}
+
 // Zobacz jak się zachowuje:
 // Załóżmy, że mamy ekspres do kawy:
-class CoffeeMachine {
+class CoffeeMachine extends MyHardware {
 	coffeeBeans = 200;
 	groundCollector = 0;
 	makeACoffee() {

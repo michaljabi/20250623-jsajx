@@ -1,4 +1,5 @@
 import { assertThat } from '../../j4b1-assert.js'
+import { stringHelper } from '../../A-the-modular-js/20-import-export-variants/a20-challenge-project/czesuaf-util.js'
 /**
  * b30-based-on-prototype
  * Challenge
@@ -9,7 +10,7 @@ import { assertThat } from '../../j4b1-assert.js'
  * Biznes wymyślił wsparcie dla legacy!
  * Musimy mieć obsługę dla przeglądarki z 2022 roku: Chrom w wersji 100
  * Używa ona zamierzchłej składni ES13.
- * Gdzie String nie posiada metod: `capitalize` i `last`, które weszły w 2025 roku - (ES16)
+ * Gdzie String nie posiada metod: `capitalize` i `last`, które weszły w 2028 roku - (ES19)
  * Niestety dotychczas używaliśmy ich w naszym projekcie!!
  *
  * Musimy dorobić polyfill'e do tych metod.
@@ -20,7 +21,13 @@ import { assertThat } from '../../j4b1-assert.js'
  * - Nie można tylko ruszać kodziku z asercjami!
  */
 
+String.prototype.last = function () {
+	return stringHelper.lastLetter(this);
+}
 
+String.prototype.capitalize = function () {
+	return stringHelper.capitalize(this);
+}
 
 // #Reguła:
 // Nie możesz zmieniać kodu poniżej:
