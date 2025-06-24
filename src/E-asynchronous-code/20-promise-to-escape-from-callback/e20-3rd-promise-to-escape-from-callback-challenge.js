@@ -46,11 +46,13 @@ const DZej = {
 			}, 3000)
 		})
 	},
-	/*
 	async getJSON(url) {
-		return ''
+		// await coutdownTime(4000)
+		if (url.endsWith('/it')) {
+			return { message: 'did you try?' }
+		}
+		throw { status: 404, message: 'Invalid URL!' }
 	}
-		*/
 }
 
 
