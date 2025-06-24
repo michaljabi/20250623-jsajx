@@ -14,29 +14,28 @@ import { stringHelper } from '../../A-the-modular-js/20-import-export-variants/a
 const splitToWords = (sentence = '', splitter = '-') => sentence.split(splitter);
 
 function capitalize(sentence) {
-	return splitToWords(sentence, ' ').map((w, idx) => {
-		if (idx === 0) {
-			return stringHelper.capitalize(w);
-		}
-		return w.toLowerCase();
-	}).join(' ');
+	return splitToWords(sentence, ' ')
+		.map((w, idx) => idx === 0 ? stringHelper.capitalize(w) : w.toLowerCase())
+		.join(' ');
 }
 
 function kebabCaseToCamelCase(sentence) {
-	return splitToWords(sentence).map((w, idx) => {
-		if (idx === 0) {
-			return w.toLowerCase();
-		}
-		return stringHelper.capitalize(w);
-	}).join('');
+	return splitToWords(sentence)
+		.map((w, idx) => idx === 0 ? w.toLowerCase() : stringHelper.capitalize(w))
+		.join('');
 }
 
 function kebabCaseToPascalCase(sentence) {
-	return splitToWords(sentence).map((w) => stringHelper.capitalize(w)).join('');
+	// return splitToWords(sentence).map((w) => stringHelper.capitalize(w)).join('');
+	return splitToWords(sentence)
+		.map(stringHelper.capitalize)
+		.join('');
 }
 
 function kebabCaseToSnakeCase(sentence) {
-	return splitToWords(sentence).map(w => w.toLocaleLowerCase()).join('_');
+	return splitToWords(sentence)
+		.map(w => w.toLocaleLowerCase())
+		.join('_');
 }
 
 // #Reguła:
