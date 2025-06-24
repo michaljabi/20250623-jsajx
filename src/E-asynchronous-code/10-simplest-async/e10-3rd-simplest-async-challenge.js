@@ -1,3 +1,4 @@
+// @ts-check
 import { assertThat } from '../../j4b1-assert.js'
 /**
  * e10-simplest-async
@@ -24,10 +25,38 @@ import { assertThat } from '../../j4b1-assert.js'
  * - Kod zmieniaj tylko w środku implementacji getJSON()
  */
 
+/**
+ * @interface CallbackFn
+ * 
+ */
+
+/**
+ * @param {number} a 
+ * @param {number|undefined} b 
+ * @returns {number}
+ */
+function addTwoNumbers(a, b = 0) {
+	return a + b;
+}
+
+console.log(addTwoNumbers(1));
+// console.log(addTwoNumbers('a', 'b'));
+
 const DZej = {
+
+	/**
+	 * @param {string} url 
+	 * TODO: finish 
+	 */
 	getJSON(url, callback) {
 		// #Reguła:
 		// Kodzik można pisać i zmieniać tylko w tym bloku.
+		console.log(url);
+		if (url.endsWith('/it')) {
+			callback({ message: 'did you try?' }, null)
+		} else {
+			callback(null, { status: 404, message: 'Invalid URL!' })
+		}
 	}
 }
 
@@ -52,7 +81,7 @@ DZej.getJSON('https://reynholm-industries.com/not-existing', (data, error) => {
 assertThat(
 	'',
 	expect => expect(secondAjaxResult).toEqual({
-		error: {status: 404, message: 'Invalid URL!'},
+		error: { status: 404, message: 'Invalid URL!' },
 		data: null
 	})
 )//=
