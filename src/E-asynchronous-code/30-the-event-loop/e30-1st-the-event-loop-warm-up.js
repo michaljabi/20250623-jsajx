@@ -16,17 +16,19 @@ const collector = [];
 collector.push(1);
 
 
-collector.push(3);
+Promise.resolve().then(() => {
+	collector.push(3);
+})
 
 
 collector.push(2);
 
 queueMicrotask(() => {
-		assertThat(
-			'Collector has elements in proper order',
-			expect => expect(collector).toEqual([1, 2, 3])
-		) //=
-	})
+	assertThat(
+		'Collector has elements in proper order',
+		expect => expect(collector).toEqual([1, 2, 3])
+	) //=
+})
 
 // #2 Task ----------------------------------------------------------
 
@@ -34,15 +36,19 @@ const secondCollector = [];
 
 secondCollector.push(1);
 
-
-secondCollector.push(3);
-
+setTimeout(() => {
+	secondCollector.push(3);
+})
 
 secondCollector.push(2);
 
 queueMicrotask(() => {
-		assertThat(
-			'Second Collector has elements in proper order',
-			expect => expect(secondCollector).toEqual([1, 2])
-		) //=
-	})
+	assertThat(
+		'Second Collector has elements in proper order',
+		expect => expect(secondCollector).toEqual([1, 2])
+	) //=
+})
+
+setTimeout(() => {
+	console.log(secondCollector);
+})
