@@ -16,23 +16,57 @@ import { assertThat, fireCount } from '../../j4b1-assert.js'
 function getTheRefund(refundFn) {
 	const totalRefund = 300;
 	fireCount(getTheRefund)
-	refundFn(totalRefund);
+
+		; (() => {
+
+			; (() => {
+				//throw new Error('Not allowed to collect refund')
+			})();
+		})();
+
+	setTimeout(() => {
+		// PROVIDER:
+		// refundFn(300);
+
+		// todo: [e20] - need to fix this.... 
+		/// throw new Error('Not allowed to collect refund')
+		refundFn('Not allowed to collect refund', 0)
+	}, 1000)
 }
 
 // Person 1
 let collectedRefund = 0;
-getTheRefund((value) => {
-	collectedRefund += value;
-})
+
+// CONSUMER:
+try {
+	getTheRefund((value) => {
+		collectedRefund += value;
+	})
+} catch (e) {
+	console.log(e.message)
+}
 
 // Person 2
 let collectedTwoRefunds = 0;
+
+
+// CONSUMER:
+getTheRefund((err, value) => {
+	if (err) {
+		console.log(err.message)
+		return;
+	}
+	collectedTwoRefunds += value;
+})
+
+// CONSUMER:
 getTheRefund((value) => {
 	collectedTwoRefunds += value;
 })
-getTheRefund((value) => {
-	collectedTwoRefunds += value;
-})
+
+setTimeout(() => {
+	console.log('!')
+}, 2000)
 
 
 // #Reguła:
