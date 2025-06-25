@@ -74,8 +74,10 @@ console.log(person4);
 // Tylko korzystając z metod 2) i 3) Mamy dostęp do "czytelnego" dla nas konstruktora
 console.log(person1.constructor.name);
 console.log(person2.constructor.name);
+console.log(person2.constructor);
 console.log(person3.constructor.name);
 console.log(person4.constructor.name);
+console.log(person4.constructor);
 // Istnienie w instancji pola `constructor` może wydawać Ci się dziwne.
 // Nigdy nie definiowaliśmy takiego pola - a jednak mamy do niego dostęp.
 // To wszystko wyjaśni się później - w momencie w którym powiemy więcej o prototypach i meta-programowaniu

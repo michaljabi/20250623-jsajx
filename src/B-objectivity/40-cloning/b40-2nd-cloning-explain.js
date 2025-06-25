@@ -1,5 +1,5 @@
 import { assertThat } from '../../j4b1-assert.js'
-
+import cloneDeep from 'lodash/cloneDeep'
 /**
  * b40-cloning
  * Explain
@@ -42,7 +42,7 @@ console.log(reference === myNewObject);
 
 
 // Dobrze obrazuje to (odniesienie przez referencje) następujący przykład.
-let myHelloObject = {hello: 'World'}
+let myHelloObject = { hello: 'World' }
 const otherReference = myHelloObject;
 
 myHelloObject = {};
@@ -73,9 +73,9 @@ console.log(otherReference);
 // Shallow COPY - to the rescue !
 // Mogło by się wydawać że następujące, nowoczesne zabawki, załatwią sprawę:
 
-const user = {name: 'Mike'};
+const user = { name: 'Mike' };
 
-const newUser = {...user};
+const newUser = { ...user };
 // lub:
 const assignedUser = Object.assign({}, user);
 
@@ -87,7 +87,7 @@ console.log(user === assignedUser);
 console.log(assignedUser === newUser);
 
 // W istocie jest to dobre rozwiązanie, dopóki nie dotrzemy do zagnieżdżenia obiektu w obiekcie.
-const myHouse = { name: 'Small loft', address: { street: 'Grodzka', number: 8} };
+const myHouse = { name: 'Small loft', address: { street: 'Grodzka', number: 8 } };
 const myCopyHouse = { ...myHouse };
 
 console.log(myHouse);
@@ -126,18 +126,21 @@ const complicatedObject = {
 		console.log('Hello World')
 	},
 	myNumber: NaN,
-	myArrayOfObjects: [{ name: 'John !'}],
+	myArrayOfObjects: [{ name: 'John !' }],
 	myRegExp: /./,
 	myNullValue: null,
 	myOtherNumber: 10292,
-	address : {
+	address: {
 		hello: 'MOMOT'
-	} ,
+	},
 	car: new Car()
 }
 
 function professionalCloner(toClone) {
-	switch(typeof toClone) {
+	// return cloneDeep(toClone);
+	// return structuredClone(toClone)
+	// return JSON.parse(JSON.stringify(toClone));
+	switch (typeof toClone) {
 		case 'string':
 		case 'symbol':
 		case 'undefined':
@@ -146,22 +149,22 @@ function professionalCloner(toClone) {
 		case 'bigint':
 			return toClone;
 		case 'function':
-			return function(...args) {
+			return function (...args) {
 				return toClone.apply(this, args)
 			};
 	}
 
 	// potrzebny osobny zapis dla null (bo `typeof null` to - `object`!)
-	if(toClone === null) {
+	if (toClone === null) {
 		return toClone;
 	}
-	if(toClone instanceof Date) {
+	if (toClone instanceof Date) {
 		return new Date(toClone);
 	}
-	if(toClone instanceof RegExp) {
+	if (toClone instanceof RegExp) {
 		return new RegExp(toClone);
 	}
-	if(Array.isArray(toClone)) {
+	if (Array.isArray(toClone)) {
 		return toClone.map(e => professionalCloner(e));
 	}
 	// Jeśli żaden `if` nie odpali
@@ -170,7 +173,7 @@ function professionalCloner(toClone) {
 	// Zachowamy wtedy konstruktor dla nowego obiektu
 	// później klonujemy każdy z kluczy dla obiektu i nadpisujemy go - korzystamy z rekurencji.
 	const newObject = Object.create(toClone);
-	for(const key of Object.keys(toClone)) {
+	for (const key of Object.keys(toClone)) {
 		newObject[key] = professionalCloner(toClone[key]);
 	}
 	return newObject
@@ -210,6 +213,14 @@ assertThat(
 	'cloned functions should not lead to the same point in memory',
 	expect => expect(complicatedObject.myFunction).notToBe(clonedComplicated.myFunction)
 )  //=
+
+// clonedComplicated.myFunction();
+
+assertThat(
+	'cloned method should not be undefined',
+	expect => expect(clonedComplicated.myFunction).notToBe(undefined)
+)  //=
+
 assertThat(
 	'serialized object structure should be the same',
 	expect => expect(JSON.stringify(complicatedObject)).toBe(JSON.stringify(clonedComplicated))
