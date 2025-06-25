@@ -10,14 +10,24 @@ import { assertThat } from '../../j4b1-assert.js'
 
 class GuestList {
 
-	guests = [];
+	// b60 - private things
+	#guests = [];
+
+	get guests() {
+		// 1. niestety to jest tylko shallow copy!
+		// return [...this.#guests]
+
+		// 2. powinien być `clone`
+		// b40 - cloning
+		return structuredClone(this.#guests)
+	}
 
 	signGuest(name, lastName) {
-		this.guests.push({ name, lastName })
+		this.#guests.push({ name, lastName })
 	}
 
 	*[Symbol.iterator]() {
-		for (const { name } of this.guests) {
+		for (const { name } of this.#guests) {
 			yield name;
 		}
 	}
@@ -31,6 +41,11 @@ myGuests.signGuest('Jane', 'Doe');
 myGuests.signGuest('Joe', 'Doe');
 myGuests.signGuest('Jan', 'Doe');
 myGuests.signGuest('Janina', 'Doe');
+
+// zabezpieczenie przed Trollami - to nasz getter.
+myGuests.guests.push('TROLL')
+myGuests.guests[1].name = 'TROLL';
+console.log(myGuests.guests);
 
 const collector = [];
 // odkomentuj poniższy blok, kiedy będzie już implementacja:
