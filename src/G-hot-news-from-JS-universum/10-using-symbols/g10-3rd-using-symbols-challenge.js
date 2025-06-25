@@ -22,15 +22,18 @@ import { assertThat } from '../../j4b1-assert.js'
  */
 
 
-const hashSecretCode = 'hash';
+const hashSecretCode = Symbol();
 
 function makeAUser(name, hash) {
-	 return {name, [hashSecretCode]: hash};
+	return { name, [hashSecretCode]: hash, sayHello() { }, birth: new Date(), /*, myInt: 10n*/ };
 }
 
 // #Reguła:
 // Nie możesz zmieniać kodu poniżej:
 const user1 = makeAUser('Kasia', '*WEY&*W%!*&W*R');
+
+console.log(user1);
+
 // Podczas działania programu chcemy mieć dostęp do specjalnego hashSecretCode
 assertThat(
 	'Secret hash should be present when program is working',
@@ -38,7 +41,9 @@ assertThat(
 ) //=
 
 const serializeUser1 = JSON.stringify(user1);
+console.log(serializeUser1);
 const unSerializedUser1 = JSON.parse(serializeUser1);
+console.log(unSerializedUser1);
 // Jednak po serializacji i deserializacji nie chcemy aby była możliwość odczytania sekretnego hash'a:
 assertThat(
 	'Secret hash should not be serialized and deserialized',
