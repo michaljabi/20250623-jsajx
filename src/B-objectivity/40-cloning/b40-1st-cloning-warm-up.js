@@ -29,7 +29,27 @@ const myFirstImpressiveObject = {
 function cloner(objectToClone) {
 	// #Reguła:
 	// Kodzik można pisać tylko w tym bloku.
-	return objectToClone;
+
+	// to nie wystarczy bo shallow!
+	// return { ...objectToClone };
+	// To jest super: bo dziala !
+	// return structuredClone(objectToClone);
+
+	// To jest prawie super bo ograniczenia JSON:
+	// JSON.parse(JSON.stringify(objectToClone));
+
+	// Rozwiazanie "na piechote", ale tez ma ograniczenia!!
+	const clonedObj = {};
+
+	for (const key in objectToClone) {
+		if (typeof objectToClone[key] === 'object' && objectToClone[key] !== null) {
+			clonedObj[key] = cloner(objectToClone[key])
+		} else {
+			clonedObj[key] = objectToClone[key];
+		}
+	}
+
+	return clonedObj;
 }
 
 
@@ -37,7 +57,13 @@ function cloner(objectToClone) {
 // Nie możesz zmieniać kodu poniżej:
 
 const clonedFirstObject = cloner(myFirstObject);
+
+console.log(clonedFirstObject === myFirstObject)
+
 const clonedFirstImpressiveObject = cloner(myFirstImpressiveObject);
+
+console.log(clonedFirstImpressiveObject === myFirstImpressiveObject)
+console.log(clonedFirstImpressiveObject.address === myFirstImpressiveObject.address)
 
 assertThat(
 	'clonedFirstObject > both suppose to be an objects',
