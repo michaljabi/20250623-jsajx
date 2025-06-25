@@ -44,9 +44,16 @@ for (const values of Array.from(arrayLike)) {
     console.log(values);
 }
 
-// to nie zadziała bo brakuje [Symbol.iterable]
-// TODO. dostarcz Symbol.iterable + generator - żeby działało!
-for (const values of [...arrayLike]) {
+const arrayLike2 = {
+    0: 'a', 1: 'b', length: 2, *[Symbol.iterator]() {
+        yield this[0];
+        yield this[1];
+    }
+};
+
+// to nie zadziała bo brakuje [Symbol.iterator]
+// TODO. dostarcz Symbol.iterator + generator - żeby działało!
+for (const values of [...arrayLike2]) {
     console.log(values);
 }
 
