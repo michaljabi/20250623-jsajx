@@ -67,3 +67,6 @@ assertThat(
 	'collector should have all the names from GuestList',
 	expect => expect(collector).toEqual(['Jane', 'Joe', 'Jan', 'Janina'])
 )  //=
+
+
+console.log(JSON.stringify(myGuests.guests))
