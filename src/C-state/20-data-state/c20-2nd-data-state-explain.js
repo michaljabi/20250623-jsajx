@@ -17,7 +17,7 @@ import { assertThat } from '../../j4b1-assert.js'
 
 const state = {
 	shoppingList: [
-		{name: 'carrots', amount: '2kg', value: 10}
+		{ name: 'carrots', amount: '2kg', value: 10 }
 	]
 }
 
@@ -74,7 +74,13 @@ function immerAddProduct(product = {}) {
 
 const previousState = state;
 
-const nextState = immerAddProduct({ name: 'Lego', amount: '1kg', value: 200})
+const nextState = immerAddProduct({ name: 'Lego', amount: '1kg', value: 200 })
+
+
+console.log(previousState);
+console.log(nextState);
+
+console.log(nextState.shoppingList === previousState.shoppingList);
 
 assertThat(
 	'Previous state suppose to have 1 product',
@@ -126,7 +132,7 @@ console.log(previousState.shoppingList[0] === nextState.shoppingList[0])
 const myFruitListState = { fruits: ['bananas'] };
 
 const fruitReducer = produce((draft, action) => {
-	switch(action.type) {
+	switch (action.type) {
 		case 'ADD_FRUIT':
 			draft.fruits.push(action.payload);
 			break;
@@ -134,13 +140,15 @@ const fruitReducer = produce((draft, action) => {
 }, { fruits: [] })
 
 console.log(myFruitListState)
-const myNextFruitListState = fruitReducer(myFruitListState, {type: 'ADD_FRUIT', payload: 'cherries'})
+const myNextFruitListState = fruitReducer(myFruitListState, { type: 'ADD_FRUIT', payload: 'cherries' })
 
 // STAN NASTĘPNY:
 console.log(myNextFruitListState);
 // STAN POPRZEDNI (pozostaje nienaruszony):
 console.log(myFruitListState);
 // Stwarza to wiele różnych ciekawych pomysłów:
+
+// NIEAKTUALNE poniższe bo załatwie je tzw. ReduxToolkit - a to STANDARD w Redux aktualnie
 
 // Immera możemy np. połączyć z Reduxem - w celu uproszczenia zapisu reducerów:
 // https://immerjs.github.io/immer/example-setstate#redux--immer
