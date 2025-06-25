@@ -10,10 +10,13 @@ import { assertThat } from '../../j4b1-assert.js'
  * - Kod można zmieniać tylko w środku handlera przekazanego do Proxy
  */
 
-const shouterObject = new Proxy( {  }, {
+const shouterObject = new Proxy({}, {
 	// #Reguła:
 	// Kod piszemy tylko tutaj:
-
+	set(target, property, value) {
+		target[property] = value + '!';
+	},
+	deleteProperty() { }
 })
 
 // #Reguła:
