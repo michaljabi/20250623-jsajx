@@ -10,7 +10,17 @@ import { assertThat } from '../../j4b1-assert.js'
 
 class GuestList {
 
-	signGuest(name, lastName) {}
+	guests = [];
+
+	signGuest(name, lastName) {
+		this.guests.push({ name, lastName })
+	}
+
+	*[Symbol.iterator]() {
+		for (const { name } of this.guests) {
+			yield name;
+		}
+	}
 }
 
 // #Reguła:
@@ -24,9 +34,9 @@ myGuests.signGuest('Janina', 'Doe');
 
 const collector = [];
 // odkomentuj poniższy blok, kiedy będzie już implementacja:
-// for(const guestName of myGuests) {
-// 	collector.push(guestName);
-// }
+for (const guestName of myGuests) {
+	collector.push(guestName);
+}
 
 // #Reguła:
 // Nie możesz zmieniać kodu poniżej:
@@ -36,9 +46,9 @@ assertThat(
 )  //=
 assertThat(
 	'second guest should be Joe',
-	expect => expect(myGuests.guests[1]).toEqual( {name: 'Joe', lastName: 'Doe'})
+	expect => expect(myGuests.guests[1]).toEqual({ name: 'Joe', lastName: 'Doe' })
 )  //=
 assertThat(
 	'collector should have all the names from GuestList',
-	expect => expect(collector).toEqual(['Jane','Joe','Jan','Janina'])
+	expect => expect(collector).toEqual(['Jane', 'Joe', 'Jan', 'Janina'])
 )  //=
