@@ -12,10 +12,10 @@ import { assertThat } from '../../j4b1-assert.js'
 
 // 1) PUSH FUNCTIONALITY:
 
-function push (element, array) {
+function push(element, array) {
 	// #Reguła:
 	// Kodzik można pisać w tym bloku.
-	return array;
+	return [...array, element];
 }
 
 const original = [1, 2, 3, 4, 5];
@@ -45,7 +45,7 @@ assertThat(
 function pop(array) {
 	// #Reguła:
 	// Kodzik można pisać w tym bloku.
-	return array;
+	return array.filter((_, idx) => idx !== array.length - 1);
 }
 
 const withAllElements = ['mangoes', 'strawberries', 'blueberries'];
