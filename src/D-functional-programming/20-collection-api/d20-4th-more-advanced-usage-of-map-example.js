@@ -15,7 +15,7 @@ function myLittleInMemoryDB() {
 	return {
 		// Dodaj element jako klucz i wartość
 		insertItem(tableName, item) {
-			if(!myLittleDb.has(tableName)) {
+			if (!myLittleDb.has(tableName)) {
 				// Jeśli klucz w mapie nie istnieje to tworzymy nowy razem z pustą tablicą (Array)
 				myLittleDb.set(tableName, []);
 			}
@@ -37,20 +37,22 @@ function myLittleInMemoryDB() {
 			const items = myLittleDb.get(tableName);
 			return items.filter(queryFn);
 		},
-		getTheMap() {
+		getTheMap() /*: readonly Map<string, []>*/ {
 			return myLittleDb;
 		}
 	}
 }
 
 const dbInstance = myLittleInMemoryDB();
+const dbInstance2 = myLittleInMemoryDB();
+const dbInstance3 = myLittleInMemoryDB();
 
-dbInstance.insertItem('coffee', {id:1, name: 'Mocha'})
-dbInstance.insertItem('coffee', {id:2, name: 'Espresso'})
+dbInstance.insertItem('coffee', { id: 1, name: 'Mocha' })
+dbInstance.insertItem('coffee', { id: 2, name: 'Espresso' })
 
-dbInstance.insertItem('barista', {id:1, name: 'Maurice', lastName: 'Moss'})
-dbInstance.insertItem('barista', {id:2, name: 'Jen', lastName: 'Barber'})
-dbInstance.insertItem('barista', {id:3, name: 'Jen', lastName: 'Doe'})
+dbInstance.insertItem('barista', { id: 1, name: 'Maurice', lastName: 'Moss' })
+dbInstance.insertItem('barista', { id: 2, name: 'Jen', lastName: 'Barber' })
+dbInstance.insertItem('barista', { id: 3, name: 'Jen', lastName: 'Doe' })
 
 // Jak wygląda nasza baza danych:
 console.log(dbInstance.getTheMap());

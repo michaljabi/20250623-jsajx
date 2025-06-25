@@ -54,14 +54,17 @@ console.log(Object.keys(mySet));
 
 const myRealMap = new Map();
 
-myRealMap.set( 'hello', 'World' );
-myRealMap.set( 'hello', 'World 2' );
-myRealMap.set( 'myName', 'Maurice Moss' );
-myRealMap.set( 'myOtherName', 'Roy' );
+myRealMap.set('hello', 'World');
+myRealMap.set('hello', 'World 2');
+myRealMap.set('myName', 'Maurice Moss');
+myRealMap.set('myOtherName', 'Roy');
 
-console.log( myRealMap );
-console.log( myRealMap.get( 'non-existing' ) );
-console.log( myRealMap.get( 'hello' ) );
+console.log(myRealMap);
+console.log(myRealMap.get('non-existing'));
+console.log(myRealMap.get('hello'));
+
+console.log(myRealMap.has('hello'))
+console.log(myRealMap.has('myName'))
 
 // Usuwanie elementu:
 myRealMap.delete('hello') //=
@@ -80,20 +83,30 @@ console.log(Array.from(myRealMap.keys()))
 console.log(Array.from(myRealMap.values()))
 
 // Iterowanie:
-for(const key of myRealMap.keys()) {
+for (const key of myRealMap.keys()) {
 	console.log(key)
 }
-for(const value of myRealMap.values()) {
+for (const value of myRealMap.values()) {
 	console.log(value)
 }
-for(const entry of myRealMap) {
-	console.log(entry)
+for (const [key, value] of myRealMap) {
+	console.log(key)
+	console.log(value)
 }
+
+
+
+
 
 // Trick:
 const theItGuy = Object.fromEntries(myRealMap);
 console.log(theItGuy)
 console.log(theItGuy.myName)
+
+console.log(Object.entries(theItGuy))
+
+Object.keys(theItGuy) //=
+Object.values(theItGuy) //=
 
 // Sprawdzenie czy dany klucz istnieje w Mapie:
 myRealMap.has('myName') //=
@@ -106,19 +119,20 @@ myRealMap.size //=
 
 const myRealSet = new Set();
 
-myRealSet.add( 'apple' );
-myRealSet.add( 'cherry' );
-myRealSet.add( 'banana' );
-myRealSet.add( 'banana' );
-myRealSet.add( 'banana' );
-myRealSet.add( 'cherry' );
-myRealSet.add( 'mango' );
+myRealSet.add('apple');
+myRealSet.add('cherry');
+myRealSet.add('banana');
+myRealSet.add('banana');
+myRealSet.add('banana');
+myRealSet.add('cherry');
+myRealSet.add('mango');
 
-console.log( myRealSet );
+console.log(myRealSet);
 
 myRealSet.delete('mango') //=
 
-console.log( myRealSet );
+console.log(myRealSet);
+console.log(myRealSet.size);
 
 // Tworzenie nowego Set'a z istniejącej tablicy
 console.log(
@@ -129,7 +143,7 @@ console.log(
 console.log(Array.from(myRealSet))
 
 // Iterowanie:
-for(const fruit of myRealSet) {
+for (const fruit of myRealSet) {
 	console.log(fruit)
 }
 
