@@ -23,15 +23,59 @@ console.log(person);
 // Przykładowo, za każdym razem gdy poprosisz o pole w obiekcie - ja zwrócę wartość "TROLL" 😁.
 
 const myTroll = new Proxy(person, {
-	get ( target, propertyKey ) {
+	set(target, field, value) {
+		console.log(field);
+		console.log(value);
+
+		target[field] = value;
+	},
+	deleteProperty(target, field) {
+		// delete target[field]
+	},
+	get(target, propertyKey) {
 		// console.log(propertyKey)
 		// console.log(target[propertyKey])
-		return 'TROLL'
+
+		// return target[propertyKey]
+		if (!Reflect.has(target, propertyKey)) {
+			return '😿'
+		}
+
+		/*if (target[propertyKey] === undefined) {
+			return '😿'
+		}*/
+		return Reflect.get(target, propertyKey)
 	}
 })
 
+myTroll.name = 'NOWY'
+
+myTroll.sample = undefined;
+
+delete myTroll.name;
+
 console.log(myTroll.name)
 console.log(myTroll.lastName)
+console.log(myTroll.xyz)
+console.log(myTroll.xyzsss)
+console.log(myTroll.xy)
+console.log(myTroll.sample)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 console.log(myTroll.any)
 console.log(myTroll.nonExsitent)
 console.log(JSON.stringify(myTroll));
@@ -66,7 +110,7 @@ const someOtherSample = {
 }
 
 const sideEffects = new Proxy(someOtherSample, {
-	get ( target, propertyKey ) {
+	get(target, propertyKey) {
 		console.log(propertyKey)
 		// zauważ że pułapka działa, jednak my nie zwracamy żadnej wartości
 		// dlatego pola mają dają nam "undefined"
@@ -83,10 +127,10 @@ console.log(sideEffects.hello)
 
 const myProject = new Proxy({}, {
 	deleteProperty(target, propertyKey) {
-		if (propertyKey in target){
+		if (propertyKey in target) {
 			// faktycznie usuwamy:
 			delete target[propertyKey]
-			console.log('usuwam:',propertyKey)
+			console.log('usuwam:', propertyKey)
 			return true
 		}
 		console.log('nie znalazłem:', propertyKey)
