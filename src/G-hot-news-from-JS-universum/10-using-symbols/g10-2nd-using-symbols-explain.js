@@ -19,12 +19,17 @@ console.log(mySymbol);
 console.log(mySymbol === Symbol())
 console.log(Symbol() === Symbol())
 
+console.log(typeof Symbol());
+
+// to jest dla nas OK, bo wiemy że obiekty są przekazywane przez referencje
+console.log({} === {});
+
 // Symbolu nie da się utworzyć jako instancji:
 // nie można go wywołać ze słowem kluczowym new !
 try {
 	new Symbol();
 } catch ( e ) {
-	console.log(e);
+	console.log(e.message);
 }
 
 // Tak więc wywołanie Symbol() - to globalna "factory function" dla symboli.
