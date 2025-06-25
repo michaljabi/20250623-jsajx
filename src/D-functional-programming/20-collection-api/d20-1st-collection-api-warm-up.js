@@ -11,7 +11,8 @@ import { assertThat } from '../../j4b1-assert.js'
  */
 
 const numbers = [10, 20, 30, 2, 2, 2, 30, 20, 2, 10, 8, 9, 0];
-const distinctNumbers = numbers
+// const distinctNumbers = Array.from(new Set(numbers))
+const distinctNumbers = [...new Set(numbers)]
 
 // #Reguła:
 // Nie możesz zmieniać kodu poniżej:
