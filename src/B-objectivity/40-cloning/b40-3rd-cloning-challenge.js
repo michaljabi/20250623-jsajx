@@ -28,20 +28,28 @@ const initialTypeState = {
 }
 
 // Funkcja obliczająca stan następny na podstawie stanu poprzedniego
+// https://redux.js.org/
+// *REDUCER
 function calculateNewParagraphState(currentState = initialTypeState, paragraphText = '') {
-	  currentState.paragraphTextContent += paragraphText;
-	  return currentState;
+	const copiedState = { ...currentState } // Object.assign({}, currentState) 
+	copiedState.paragraphTextContent += paragraphText;
+	return copiedState;
 }
 
 // Nasza symulacja pisania czegoś przez usera:
-const changeDetectionModule = (function(){
+const changeDetectionModule = (function () {
 
 	// #Event1: [init program]
 	const state1 = calculateNewParagraphState();
 	// #Event2: [user typed: 'Have']
 	const state2 = calculateNewParagraphState(state1, 'Have')
+	console.log(state2);
 	// #Event3: [user typed: ' you tried']
 	const state3 = calculateNewParagraphState(state2, ' you tried')
+	console.log(state3);
+
+	console.log(state2 === state3);
+
 	// #Event4: [user typed: ' to turn it off and on again?']
 	const state4 = calculateNewParagraphState(state3, ' to turn it off and on again?')
 
@@ -56,6 +64,13 @@ const changeDetectionModule = (function(){
 
 // Pomocnicza destrukturyzacja kolejnych stanów aplikacji:
 const [first, second, third, forth] = changeDetectionModule;
+
+
+console.log(first);
+console.log(second);
+
+console.log(first === second)
+console.log(second === third)
 
 assertThat(
 	'At the init program, the state should be empty',
