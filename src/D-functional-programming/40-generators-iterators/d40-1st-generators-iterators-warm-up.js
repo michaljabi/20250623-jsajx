@@ -25,11 +25,11 @@ const numeric = [[1, 2], [3, 4]];
 let num1 = '';
 let num2 = '';
 // pętla musi zostać i iterować po `numeric`, jednak możesz modyfikować jej zawartość
-for (const placeholder of numeric) {
+for (const [a, b] of numeric) {
 	// Możesz pisać kod tutaj (wewnątrz tego bloku):
 	// console.log(placeholder);
-	num1 += placeholder[0];
-	num2 += placeholder[1];
+	num1 += a;
+	num2 += b;
 }
 // #Reguła:
 // Nie możesz zmieniać tego kodu:
@@ -59,6 +59,10 @@ console.log(Object.getOwnPropertySymbols(myOBj));
 // Możesz edytować nazwy metod
 class MyIterableConcept {
 
+	name = 'Michał';
+
+	myMethod() { }
+
 	['thisIsSimple']() {
 		// Tutaj można pisać kodzik
 		return 'FUN';
@@ -68,11 +72,27 @@ class MyIterableConcept {
 		// Tutaj można pisać kodzik
 		return [90, 10, 20];
 	}
+
+	*[Symbol.iterator]() {
+		yield 100;
+	}
+
+	/*
+	[Symbol()]() {}
+	[Symbol()]() {}
+	[Symbol()]() {}
+	[Symbol()]() {}
+	[Symbol()]() {}
+	[Symbol()]() {}
+	*/
 }
 
 const iterables = new MyIterableConcept();
 
-// console.log(Object.keys(iterables));
+console.log(Object.keys(iterables));
+Object.getOwnPropertyNames(Object.getPrototypeOf(iterables)) //=
+Object.getOwnPropertyNames(MyIterableConcept.prototype) //=
+Object.getOwnPropertySymbols(Object.getPrototypeOf(iterables)) //=
 
 // #Reguła:
 // Nie możesz zmieniać tego kodu:
